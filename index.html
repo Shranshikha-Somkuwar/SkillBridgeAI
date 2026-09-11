@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SkillBridge AI — SIH26044 Prototype</title>
+<title>SkillBridge AI — Prototype</title>
 <style>
 :root{--purple:#5b21b6;--violet:#7c3aed;--lav:#ede9fe;--mint:#d1fae5;--green:#059669;--orange:#f97316;--coral:#fb7185;--ink:#241b35;--muted:#6b6475;--bg:#faf8ff;--white:#fff;--line:#e9e2f4;--dark:#25133f}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select{font:inherit}.hidden{display:none!important}
@@ -13,6 +13,137 @@
 /* APP */
 .app{display:flex;min-height:100vh}.side{width:250px;background:var(--dark);color:white;padding:22px 15px;position:fixed;height:100vh;z-index:4}.side .brand{font-size:22px;padding:3px 12px 27px}.nav button{width:100%;border:0;background:transparent;color:#d9cfee;text-align:left;padding:12px 13px;border-radius:11px;margin:3px 0;cursor:pointer;font-size:13px}.nav button.active,.nav button:hover{background:linear-gradient(90deg,#6d28d9,#7c3aed);color:#fff}.user{position:absolute;bottom:18px;left:15px;right:15px;background:#34195a;padding:12px;border-radius:13px;font-size:11px;border:1px solid #4d2a77}.logout{margin-top:8px;border:0;background:transparent;color:#cdbbe5;cursor:pointer;font-size:11px}.main{margin-left:250px;width:calc(100% - 250px);padding:28px 36px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.top h1{font-size:27px;margin:0 0 4px}.muted{color:var(--muted);font-size:13px}.badge{background:var(--lav);color:var(--purple);padding:7px 11px;border-radius:20px;font-size:11px;font-weight:800}.page{display:none}.page.active{display:block}.grid{display:grid;gap:17px}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}.card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:19px;box-shadow:0 7px 22px rgba(56,30,91,.045)}.card h3{margin:0 0 9px;font-size:15px}.big{font-size:30px;font-weight:900}.purple{color:var(--purple)}.green{color:var(--green)}.orange{color:var(--orange)}.coral{color:#e11d48}.progress{height:9px;background:#eee9f6;border-radius:10px;overflow:hidden;margin:10px 0}.bar{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--purple),#a855f7)}.tags{display:flex;gap:6px;flex-wrap:wrap}.tag{background:#f2edfb;color:#5b21b6;padding:6px 9px;border-radius:18px;font-size:11px;font-weight:700}.btn{border:0;background:var(--purple);color:#fff;padding:9px 13px;border-radius:9px;font-weight:800;cursor:pointer}.btn:hover{filter:brightness(.95)}.btn.secondary{background:#f0eafa;color:var(--purple)}.btn.green{background:var(--green)}.btn.orange{background:var(--orange)}.hero{background:linear-gradient(135deg,#f2ecff,#fff7f0);border:1px solid #e7dcf7;padding:22px;border-radius:18px;margin-bottom:17px}.hero h2{margin:0 0 7px;font-size:20px}.score{font-size:40px;font-weight:900;color:var(--purple)}.circle{width:110px;height:110px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:conic-gradient(var(--purple) 0 78%,#eee9f6 78%);position:relative;margin:auto}.circle:after{content:"";width:82px;height:82px;background:#fff;border-radius:50%;position:absolute}.circle b{position:relative;z-index:1;font-size:22px}.list{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:13px 0;border-bottom:1px solid #eeeaf4}.list:last-child{border:0}.road{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.step{padding:15px;border-radius:13px;background:#fff;border:1px solid var(--line);min-height:125px}.step strong{display:block;margin-bottom:7px}.match{border-left:5px solid var(--green)}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:11px;border-bottom:1px solid #eeeaf4;font-size:12px}th{color:var(--muted);font-size:11px}.question{padding:15px;background:#faf8ff;border-radius:12px;margin:11px 0}.question label{display:block;margin:8px 0;font-size:12px}.toast{position:fixed;right:25px;bottom:24px;background:var(--dark);color:#fff;padding:13px 17px;border-radius:11px;display:none;z-index:20;box-shadow:0 10px 30px #0003}.company{background:linear-gradient(135deg,#f0eaff,#ecfdf5);border:1px solid #ddd1ef}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:center}.flowbox{padding:13px;border-radius:12px;text-align:center;background:#fff;border:1px solid var(--line);font-size:11px;font-weight:800}.arrow{text-align:center;color:var(--purple);font-size:20px}
 @media(max-width:900px){.auth{grid-template-columns:1fr}.auth-left{display:none}.side{width:205px}.main{margin-left:205px;width:calc(100% - 205px);padding:20px}.g3,.g2,.road,.flow{grid-template-columns:1fr}.top h1{font-size:22px}}
+
+/* ===== RESPONSIVE / MOBILE UI ===== */
+.mobile-toggle{
+  display:none;
+  border:0;
+  background:var(--dark);
+  color:#fff;
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  font-size:21px;
+  cursor:pointer;
+  flex:0 0 auto;
+}
+.mobile-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(25,13,40,.42);
+  z-index:3;
+}
+.nav button{min-height:42px}
+.main{min-width:0}
+.card,.hero,.step{min-width:0}
+.list>div{min-width:0}
+.list>div:first-child{overflow-wrap:anywhere}
+button,input,select{max-width:100%}
+
+@media (max-width:1100px){
+  .side{width:220px}
+  .main{margin-left:220px;width:calc(100% - 220px);padding:24px}
+  .g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .road{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .auth-left{padding:45px}
+  .auth-left h1{font-size:40px}
+}
+
+@media (max-width:900px){
+  .auth{grid-template-columns:1fr}
+  .auth-left{display:none}
+  .auth-right{padding:24px 16px}
+  .auth-card{padding:26px 22px;border-radius:20px}
+
+  .side{
+    width:270px;
+    left:-285px;
+    transition:left .25s ease;
+    box-shadow:12px 0 35px rgba(20,8,40,.22);
+  }
+  .side.open{left:0}
+  .mobile-overlay.open{display:block}
+
+  .main{
+    margin-left:0;
+    width:100%;
+    padding:18px 16px 28px;
+  }
+  .mobile-toggle{display:inline-grid;place-items:center}
+  .top{
+    gap:12px;
+    align-items:flex-start;
+  }
+  .top>div:first-child{min-width:0;flex:1}
+  .top h1{font-size:21px;line-height:1.2}
+  .top .muted{line-height:1.4}
+  .g3,.g2,.road,.flow{grid-template-columns:1fr}
+  .hero{padding:18px}
+  .hero>div[style*="display:flex"]{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:14px !important;
+  }
+  .hero .score{font-size:34px}
+  .circle{width:100px;height:100px}
+  .circle:after{width:74px;height:74px}
+  .card{padding:16px}
+  .list{
+    flex-wrap:wrap;
+    align-items:flex-start;
+    gap:9px 12px;
+  }
+  .list>div{width:100%}
+  .list>b,.list>span,.list>button{margin-left:0}
+  .list>button{width:100%}
+  table{
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+    -webkit-overflow-scrolling:touch;
+  }
+  th,td{padding:9px 8px}
+  .flowbox{min-height:64px;display:grid;place-items:center}
+  .arrow{transform:rotate(90deg)}
+  .company .muted{line-height:1.5}
+}
+
+@media (max-width:600px){
+  .main{padding:14px 12px 24px}
+  .top{margin-bottom:16px}
+  .top h1{font-size:19px}
+  .badge{padding:6px 9px;font-size:10px}
+  .auth-right{padding:14px}
+  .auth-card{padding:22px 16px}
+  .auth-card h2{font-size:23px}
+  .field{margin:11px 0}
+  .field input,.field select{padding:11px 12px}
+  .authbtn{padding:12px}
+  .hero h2{font-size:18px;line-height:1.3}
+  .score{font-size:32px}
+  .big{font-size:26px}
+  .card h3{font-size:14px}
+  .muted{font-size:12px}
+  .tags{gap:5px}
+  .tag{font-size:10px;padding:5px 8px}
+  .btn{width:100%;padding:10px 12px}
+  .question{padding:13px}
+  .question label{font-size:12px}
+  .road .step{min-height:auto}
+  .hero .btn{width:100%}
+  .flow{gap:6px}
+  .flowbox{font-size:10px;padding:10px}
+}
+
+@media (max-width:380px){
+  .main{padding-left:9px;padding-right:9px}
+  .auth-card{padding:19px 13px}
+  .top h1{font-size:18px}
+  .mobile-toggle{width:40px;height:40px}
+}
+
 </style>
 </head>
 <body>
@@ -26,10 +157,10 @@
   </div></div>
 </div>
 
-<div id="app" class="app hidden">
+<div id="app" class="app hidden"><div class="mobile-overlay" id="mobileOverlay" onclick="toggleMenu(false)"></div>
 <aside class="side"><div class="brand">SkillBridge <span>AI</span></div><div class="nav">
 <button class="active" onclick="show('dashboard',this)">⌂ Dashboard</button><button onclick="show('assessment',this)">✓ Skill Assessment</button><button onclick="show('dna',this)">🧬 Skill DNA</button><button onclick="show('roadmap',this)">◈ Learning Roadmap</button><button onclick="show('opportunities',this)">▣ Opportunities</button><button onclick="show('placement',this)">💼 Direct Placement</button><button onclick="show('recruiter',this)">🏢 Company Connect</button><button onclick="show('applications',this)">◷ Applications</button></div><div class="user"><b>Student Profile</b><br>Computer Science • 3rd Year<br><span style="color:#c4b5fd">Profile completeness: 86%</span><br><button class="logout" onclick="logout()">↪ Log out</button></div></aside>
-<main class="main"><div class="top"><div><h1 id="pageTitle">Student Dashboard</h1><div class="muted">Your career readiness at a glance</div></div><div class="badge"></div></div>
+<main class="main"><div class="top"><button class="mobile-toggle" aria-label="Open menu" onclick="toggleMenu()">☰</button><div><h1 id="pageTitle">Student Dashboard</h1><div class="muted">Your career readiness at a glance</div></div><div class="badge"></div></div>
 
 <section id="dashboard" class="page active">
 <div class="hero"><h2>Good evening! Your next opportunity is closer than you think.</h2><div class="muted">SkillBridge AI continuously compares your Skill DNA with opportunity requirements.</div><div style="display:flex;align-items:center;gap:28px;margin-top:16px"><div><div class="score">76/100</div><b>Career Readiness Score</b></div><div style="flex:1"><b>Next best action</b><p style="margin:6px 0">Complete <b>Cloud Deployment</b> to unlock more direct-placement roles.</p><div class="progress"><div class="bar" style="width:76%"></div></div></div><button class="btn" onclick="show('roadmap')">View Roadmap</button></div></div>
@@ -56,10 +187,23 @@ const titles={dashboard:'Student Dashboard',assessment:'Skill Assessment',dna:'S
 function switchAuth(mode){const login=mode==='login';document.getElementById('loginForm').classList.toggle('hidden',!login);document.getElementById('signupForm').classList.toggle('hidden',login);document.getElementById('loginTab').classList.toggle('active',login);document.getElementById('signupTab').classList.toggle('active',!login);document.getElementById('authTitle').textContent=login?'Welcome back':'Create your account';document.getElementById('authSub').textContent=login?'Login to continue to your SkillBridge dashboard.':'Create a profile and start building your Skill DNA.'}
 function enterApp(){document.getElementById('auth').classList.add('hidden');document.getElementById('app').classList.remove('hidden');toast('Welcome to SkillBridge AI ✓')}
 function logout(){document.getElementById('app').classList.add('hidden');document.getElementById('auth').classList.remove('hidden');switchAuth('login')}
-function show(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById('pageTitle').textContent=titles[id];document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active')}
+function show(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById('pageTitle').textContent=titles[id];document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');closeMenu()}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2600)}
 function apply(name){toast('Application submitted for '+name+' ✓');show('applications')}
 function directApply(role,company){toast('Direct application sent to '+company+' for '+role+' ✓');show('applications')}
 function markReady(){toast('Congratulations! You are now Placement Ready ✓');show('placement')}
 function completeAssessment(){toast('Assessment submitted! Skill DNA updated to 78% ✓');show('dna')}
+
+function toggleMenu(force){
+  const side=document.querySelector('.side');
+  const overlay=document.getElementById('mobileOverlay');
+  const open=force===undefined ? !side.classList.contains('open') : force;
+  side.classList.toggle('open',open);
+  overlay.classList.toggle('open',open);
+}
+function closeMenu(){
+  if(window.innerWidth<=900) toggleMenu(false);
+}
+window.addEventListener('resize',()=>{if(window.innerWidth>900) toggleMenu(false)});
+
 </script></body></html>
